@@ -1,7 +1,16 @@
 Toptrader::Application.routes.draw do
+  resources :users
+
+
   get "home/index"
 
   root :to => 'home#index'
+
+  Toptrader::Application.routes.draw do
+    resources :users, :user_sessions
+    match 'login' => 'user_sessions#new', :as => :login
+    match 'logout' => 'user_sessions#destroy', :as => :logout
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
